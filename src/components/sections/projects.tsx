@@ -81,7 +81,7 @@ export function ProjectShowcase() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              transition={{ duration: 1.2, ease: [0, 0, 0.58, 1] }}
               className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
             >
               <div className="relative h-64 overflow-hidden">
@@ -237,3 +237,4 @@ export function ProjectShowcase() {
   );
 }
 
+ease
