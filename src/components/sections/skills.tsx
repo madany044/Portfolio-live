@@ -5,13 +5,17 @@ import { useMemo } from "react";
 import { motion, type Variants, type Transition } from "framer-motion";
 import { skills } from "@/data/skills";
 
-// Infer a Skill type from your data
+// ✅ Infer a Skill type from your skills array
 type Skill = (typeof skills)[number];
 
-// Typed transition so "spring" is treated as a literal (not just string)
-const springTransition: Transition = { type: "spring", stiffness: 140, damping: 18 };
+// ✅ Strongly typed transition (no “string” type issue)
+const springTransition: Transition = {
+  type: "spring",
+  stiffness: 140,
+  damping: 18,
+};
 
-// Properly typed variants
+// ✅ Properly typed motion variants
 const container: Variants = {
   hidden: { opacity: 0 },
   show: {
@@ -32,28 +36,33 @@ const item: Variants = {
 };
 
 export function SkillsShowcase() {
+  // ✅ Group skills by category safely
   const groupedSkills = useMemo(() => {
     return skills.reduce((acc, skill) => {
-      (acc[skill.category] ??= []).push(skill);
+      if (!acc[skill.category]) acc[skill.category] = [];
+      acc[skill.category]!.push(skill);
       return acc;
     }, {} as Record<string, Skill[]>);
   }, []);
 
   return (
     <section id="skills" className="relative mx-auto w-full max-w-6xl px-6 py-20">
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-[ minmax(0,0.75fr)_minmax(0,1fr) ] md:items-center">
+      <div className="grid grid-cols-1 gap-12 md:grid-cols-[minmax(0,0.75fr)_minmax(0,1fr)] md:items-center">
+        {/* Left content */}
         <div className="space-y-6">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
             Skills & Stack
           </span>
+
           <h2 className="font-display text-3xl text-white sm:text-4xl">
             A holistic toolkit for products that need to scale and inspire.
           </h2>
+
           <p className="text-base text-white/70">
-            From design systems and platform architecture to AI-assisted workflows, I partner with
-            teams to ship experiences that stay fast, secure, and lovable at any scale. I pair modern
-            frameworks with proven engineering rigor.
+            From design systems and platform architecture to AI-assisted workflows, I help
+            teams ship fast, secure, and delightful experiences that scale.
           </p>
+
           <ul className="space-y-3 text-sm text-white/60">
             <li>• Progressive enhancement and accessibility-first thinking</li>
             <li>• Observable pipelines with automated quality gates</li>
@@ -61,6 +70,7 @@ export function SkillsShowcase() {
           </ul>
         </div>
 
+        {/* Right content */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -86,13 +96,13 @@ export function SkillsShowcase() {
                   <div key={skill.name} className="space-y-2">
                     <div className="flex items-center justify-between text-sm text-white/80">
                       <div className="flex items-center gap-2">
-                        {/* Icon component from your data */}
                         <skill.icon className="text-lg text-accent" />
                         <span>{skill.name}</span>
                       </div>
                       <span>{skill.level}%</span>
                     </div>
 
+                    {/* Progress bar */}
                     <div className="relative h-2 overflow-hidden rounded-full bg-white/10">
                       <motion.span
                         className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-sky-500"
