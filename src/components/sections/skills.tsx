@@ -11,7 +11,6 @@ const container = {
     opacity: 1,
     transition: {
       staggerChildren: 0.08,
-      ease: [0, 0, 0.58, 1],
     },
   },
 };
@@ -93,7 +92,6 @@ export function SkillsShowcase() {
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
                         viewport={{ once: true, amount: 0.3 }}
-                       transition={{ duration: 1.2, ease: [0, 0, 0.58, 1] }}
                       />
                     </div>
                   </div>
