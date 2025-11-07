@@ -1,0 +1,89 @@
+@import "tailwindcss";
+@import "tailwindcss/utilities";
+
+:root {
+  color-scheme: light;
+  background-color: #030014;
+}
+
+:root[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-body: var(--font-body);
+  --font-display: var(--font-display);
+  --color-background: 6 6 26;
+  --color-background-soft: 16 23 49;
+  --color-foreground: 226 232 255;
+  --color-accent: 153 126 255;
+  --color-accent-strong: 94 234 212;
+  --shadow-glass: 0 30px 80px rgba(55, 0, 120, 0.35);
+}
+
+@theme inline (.dark) {
+  --color-background: 2 4 20;
+  --color-background-soft: 18 16 48;
+  --color-foreground: 224 231 255;
+  --color-accent: 164 161 255;
+  --color-accent-strong: 129 140 248;
+  --shadow-glass: 0 25px 60px rgba(17, 24, 39, 0.65);
+}
+
+@layer base {
+  :root {
+    font-family: var(--font-body), system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+  }
+
+  body {
+    @apply text-sm text-white/90 antialiased selection:bg-accent/40 selection:text-white;
+    min-height: 100vh;
+    background-color: rgb(var(--color-background));
+  }
+}
+
+@layer utilities {
+  .font-body {
+    font-family: var(--font-body), "Inter", system-ui, sans-serif;
+  }
+
+  .font-display {
+    font-family: var(--font-display), "Sora", "Inter", sans-serif;
+  }
+
+  .glass-panel {
+    backdrop-filter: blur(32px);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(141, 141, 255, 0.08)
+      ),
+      rgba(12, 6, 43, 0.35);
+    box-shadow: var(--shadow-glass);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .bg-grid {
+    background-color: rgb(var(--color-background));
+    background-image: radial-gradient(
+        rgba(129, 140, 248, 0.14) 1px,
+        transparent 0
+      ),
+      radial-gradient(rgba(236, 72, 153, 0.12) 1px, transparent 0),
+      linear-gradient(135deg, rgba(76, 29, 149, 0.45), rgba(8, 47, 73, 0.55));
+    background-position: 0 0, 12px 12px, 0 0;
+    background-size: 24px 24px, 24px 24px, 100% 100%;
+  }
+
+  .neon-border {
+    box-shadow: 0 0 1px rgba(124, 58, 237, 0.6),
+      0 0 18px rgba(45, 212, 191, 0.35);
+  }
+
+  .hero-glow {
+    box-shadow: 0 0 90px rgba(76, 29, 149, 0.55),
+      inset 0 0 65px rgba(124, 58, 237, 0.35);
+  }
+}
