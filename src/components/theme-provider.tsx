@@ -1,13 +1,19 @@
+// src/components/theme-provider.tsx
 "use client";
 
+import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import type { ThemeProviderProps } from "next-themes/dist/types";
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+// Cross-version safe type inference
+type Props = Omit<React.ComponentProps<typeof NextThemesProvider>, "children"> & {
+  children: React.ReactNode;
+};
+
+export function ThemeProvider({ children, ...props }: Props) {
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="dark"
+      defaultTheme="system"
       enableSystem
       disableTransitionOnChange
       {...props}
@@ -17,3 +23,4 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   );
 }
 
+export default ThemeProvider;

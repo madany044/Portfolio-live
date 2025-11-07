@@ -119,7 +119,7 @@ export function Contact() {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+
             className="glass-panel flex flex-col items-center gap-4 rounded-3xl p-6 text-center"
           >
             <p className="text-sm uppercase tracking-[0.3em] text-white/40">
@@ -154,7 +154,6 @@ export function Contact() {
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
           onSubmit={handleSubmit}
           className="glass-panel relative grid gap-6 rounded-3xl p-8 text-white"
         >
