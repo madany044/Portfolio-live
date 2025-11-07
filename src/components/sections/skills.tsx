@@ -1,11 +1,15 @@
 "use client";
 
 import { useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants, type Transition } from "framer-motion";
 
 import { skills } from "@/data/skills";
 
-const container = {
+// Typed transition so "spring" is treated as the literal, not just string
+const springTransition: Transition = { type: "spring", stiffness: 140, damping: 18 };
+
+// Properly typed variants
+const container: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -15,22 +19,24 @@ const container = {
   },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 140, damping: 18 } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: springTransition,
+  },
 };
 
 export function SkillsShowcase() {
   const groupedSkills = useMemo(() => {
     return skills.reduce(
       (acc, skill) => {
-        if (!acc[skill.category]) {
-          acc[skill.category] = [];
-        }
-        acc[skill.category]?.push(skill);
+        if (!acc[skill.category]) acc[skill.category] = [];
+        acc[skill.category]!.push(skill);
         return acc;
       },
-      {} as Record<string, typeof skills>,
+      {} as Record<string, typeof skills>
     );
   }, []);
 
@@ -45,10 +51,9 @@ export function SkillsShowcase() {
             A holistic toolkit for products that need to scale and inspire.
           </h2>
           <p className="text-base text-white/70">
-            From design systems and platform architecture to AI-assisted
-            workflows, I partner with teams to ship experiences that stay fast,
-            secure, and lovable no matter the scale. I pair modern frameworks
-            with proven engineering rigor.
+            From design systems and platform architecture to AI-assisted workflows, I partner with
+            teams to ship experiences that stay fast, secure, and lovable no matter the scale. I pair
+            modern frameworks with proven engineering rigor.
           </p>
           <ul className="space-y-3 text-sm text-white/60">
             <li>• Progressive enhancement and accessibility-first thinking</li>
@@ -76,6 +81,7 @@ export function SkillsShowcase() {
                 </span>
                 <span className="text-xs text-white/40">{items.length} tools</span>
               </header>
+
               <div className="space-y-4">
                 {items.map((skill) => (
                   <div key={skill.name} className="space-y-2">
@@ -86,6 +92,7 @@ export function SkillsShowcase() {
                       </div>
                       <span>{skill.level}%</span>
                     </div>
+
                     <div className="relative h-2 overflow-hidden rounded-full bg-white/10">
                       <motion.span
                         className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-sky-500"
@@ -104,4 +111,3 @@ export function SkillsShowcase() {
     </section>
   );
 }
-
