@@ -1,11 +1,14 @@
+// src/components/sections/skills.tsx
 "use client";
 
 import { useMemo } from "react";
 import { motion, type Variants, type Transition } from "framer-motion";
-
 import { skills } from "@/data/skills";
 
-// Typed transition so "spring" is treated as the literal, not just string
+// Infer a Skill type from your data
+type Skill = (typeof skills)[number];
+
+// Typed transition so "spring" is treated as a literal (not just string)
 const springTransition: Transition = { type: "spring", stiffness: 140, damping: 18 };
 
 // Properly typed variants
@@ -30,14 +33,10 @@ const item: Variants = {
 
 export function SkillsShowcase() {
   const groupedSkills = useMemo(() => {
-    return skills.reduce(
-      (acc, skill) => {
-        if (!acc[skill.category]) acc[skill.category] = [];
-        acc[skill.category]!.push(skill);
-        return acc;
-      },
-      {} as Record<string, typeof skills>
-    );
+    return skills.reduce((acc, skill) => {
+      (acc[skill.category] ??= []).push(skill);
+      return acc;
+    }, {} as Record<string, Skill[]>);
   }, []);
 
   return (
@@ -52,8 +51,8 @@ export function SkillsShowcase() {
           </h2>
           <p className="text-base text-white/70">
             From design systems and platform architecture to AI-assisted workflows, I partner with
-            teams to ship experiences that stay fast, secure, and lovable no matter the scale. I pair
-            modern frameworks with proven engineering rigor.
+            teams to ship experiences that stay fast, secure, and lovable at any scale. I pair modern
+            frameworks with proven engineering rigor.
           </p>
           <ul className="space-y-3 text-sm text-white/60">
             <li>• Progressive enhancement and accessibility-first thinking</li>
@@ -87,6 +86,7 @@ export function SkillsShowcase() {
                   <div key={skill.name} className="space-y-2">
                     <div className="flex items-center justify-between text-sm text-white/80">
                       <div className="flex items-center gap-2">
+                        {/* Icon component from your data */}
                         <skill.icon className="text-lg text-accent" />
                         <span>{skill.name}</span>
                       </div>
@@ -111,3 +111,5 @@ export function SkillsShowcase() {
     </section>
   );
 }
+
+export default SkillsShowcase;
