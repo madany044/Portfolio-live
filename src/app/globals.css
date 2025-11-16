@@ -87,3 +87,7 @@
       inset 0 0 65px rgba(124, 58, 237, 0.35);
   }
 }
+
+.text-center {
+  text-align: center;
+}

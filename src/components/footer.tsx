@@ -25,7 +25,7 @@ export function Footer() {
         </div>
       </div>
       <p className="mt-6 text-xs text-white/40">
-        © {new Date().getFullYear()} Madan Y. Crafted with Next.js 16, Tailwind CSS 4, and care for details.
+       <center> © {new Date().getFullYear()} Designed And Developed By Madan Y. </center>
       </p>
     </footer>
   );

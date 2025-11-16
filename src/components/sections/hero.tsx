@@ -91,7 +91,6 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
             className="glass-panel hero-glow relative mx-auto flex max-w-sm flex-col gap-3 overflow-hidden rounded-3xl p-6 text-left md:mx-0 md:self-auto"
           >
             <span className="text-xs uppercase tracking-[0.3em] text-white/50">Snapshot</span>
@@ -117,7 +116,6 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45, duration: 0.8, ease: "easeOut" }}
           className="grid grid-cols-1 gap-4 sm:grid-cols-3"
         >
           {stats.map((stat) => (
@@ -140,7 +138,6 @@ export function Hero() {
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
               />
             </div>
           ))}
